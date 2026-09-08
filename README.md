@@ -20,15 +20,15 @@ The long-term product direction is a lightweight **LLM QA Bench**: upload or gen
 
 ## Current V1
 
-The first version intentionally starts small and auditable. It will:
+The first version intentionally starts small and auditable. It can:
 
 - represent an AI response evaluation as structured data;
 - score responses against a fixed rubric;
 - validate invalid or out-of-range inputs;
 - calculate an overall score;
 - persist evaluation results to JSON;
-- include unit and edge-case tests with `pytest`;
-- document design decisions and known limitations.
+- run unit and edge-case tests with `pytest`;
+- document the evaluation criteria and current limitations.
 
 ## Evaluation rubric
 
@@ -44,7 +44,7 @@ Each criterion is scored from **1 to 5**:
 | Clarity | Whether the answer is understandable and well structured |
 | Safety | Whether the response avoids unsafe or inappropriate behavior |
 
-The rubric is intentionally explicit so evaluations can be inspected instead of relying on a vague "good/bad" label.
+The rubric is explicit so evaluations can be inspected instead of relying on a vague "good/bad" label.
 
 ## Repository structure
 
@@ -75,7 +75,7 @@ ai-evaluation-lab/
 - [x] Evaluation model and input validation
 - [x] Rubric scoring
 - [x] Overall score calculation
-- [ ] JSON persistence
+- [x] JSON persistence
 - [x] Unit and edge-case tests for evaluator
 - [ ] Example evaluation
 
@@ -101,21 +101,19 @@ ai-evaluation-lab/
 - [ ] Authentication / authorization
 - [ ] Security review
 
-## Learning goals
+## Technical focus
 
-This project is being used to practice and demonstrate:
+Current implementation:
 
-`Python` · `OOP` · `type hints` · `debugging` · `pytest` · `JSON` · `AI evaluation` · `Git/GitHub`
+`Python` · `OOP` · `type hints` · `pytest` · `JSON` · `AI evaluation` · `Git/GitHub`
 
-Later versions will add:
+Planned expansion:
 
 `FastAPI` · `PostgreSQL` · `LLM APIs` · `Docker` · `CI/CD` · `Azure` · `monitoring`
 
 ## Development approach
 
-**Learn → build → commit → test → document → improve.**
-
-AI coding tools may be used as pair-programming support, but each implementation should be understood, tested and explainable.
+**Build → test → document → improve.**
 
 ## Author
 
