@@ -1,16 +1,26 @@
 # AI Evaluation Lab
 
-A learning-focused Python project for evaluating AI responses with a transparent, reproducible rubric.
+A practical LLM quality-assurance project for evaluating, comparing and tracking AI responses with a transparent rubric.
 
 > **Status:** In Progress — v1 foundation
 
-## Why this project exists
+## Problem this project is solving
 
-AI Evaluation Lab is being built as practical evidence for AI evaluation, software quality and Python development. The goal is not to hide the learning process: the repository will show how the evaluator evolves through small features, tests, bug fixes and documentation.
+Teams building with LLMs need a repeatable way to answer questions such as:
 
-## V1 scope
+- Did this new prompt make the output better or worse?
+- Which model performs best for this task?
+- Are responses becoming less factual, less complete or less safe?
+- Which examples fail repeatedly and why?
+- Can a human reviewer and an automated evaluator agree on quality?
 
-The first version will:
+A one-off "this answer looks good" judgement is difficult to compare over time. AI Evaluation Lab is being built to turn those reviews into structured, inspectable evaluation data.
+
+The long-term product direction is a lightweight **LLM QA Bench**: upload or generate test cases, score outputs against a rubric, compare prompt/model versions and detect quality regressions before an AI feature is shipped.
+
+## Current V1
+
+The first version intentionally starts small and auditable. It will:
 
 - represent an AI response evaluation as structured data;
 - score responses against a fixed rubric;
@@ -36,7 +46,7 @@ Each criterion is scored from **1 to 5**:
 
 The rubric is intentionally explicit so evaluations can be inspected instead of relying on a vague "good/bad" label.
 
-## Planned repository structure
+## Repository structure
 
 ```text
 ai-evaluation-lab/
@@ -52,6 +62,8 @@ ai-evaluation-lab/
 │   └── .gitkeep
 ├── docs/
 │   └── rubric.md
+├── examples/
+│   └── basic_evaluation.py
 ├── .gitignore
 ├── pyproject.toml
 └── README.md
@@ -60,29 +72,33 @@ ai-evaluation-lab/
 ## Roadmap
 
 ### V1 — Python evaluation core
-- [ ] Evaluation model and input validation
-- [ ] Rubric scoring
-- [ ] Overall score calculation
+- [x] Evaluation model and input validation
+- [x] Rubric scoring
+- [x] Overall score calculation
 - [ ] JSON persistence
-- [ ] Unit and edge-case tests
+- [x] Unit and edge-case tests for evaluator
 - [ ] Example evaluation
 
-### V2 — API + database
+### V2 — useful QA workflow
+- [ ] Evaluation datasets / test cases
+- [ ] Compare prompt or model versions
+- [ ] Failure tags and regression summaries
 - [ ] FastAPI endpoints
 - [ ] PostgreSQL persistence
 - [ ] API validation and tests
 
 ### V3 — LLM-assisted evaluation
 - [ ] LLM provider integration
-- [ ] Versioned prompts
+- [ ] Versioned evaluator prompts
 - [ ] Human vs model evaluation comparison
-- [ ] Evaluation dataset and metrics
+- [ ] Evaluation metrics and agreement analysis
 
 ### V4 — production-oriented evidence
 - [ ] Docker
 - [ ] GitHub Actions CI
 - [ ] Deployment
 - [ ] Logging and monitoring
+- [ ] Authentication / authorization
 - [ ] Security review
 
 ## Learning goals
