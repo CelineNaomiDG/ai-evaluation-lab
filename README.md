@@ -1,34 +1,35 @@
 # AI Evaluation Lab
 
-A practical LLM quality-assurance project for evaluating, comparing and tracking AI responses with a transparent rubric.
+[![CI](https://github.com/CelineNaomiDG/ai-evaluation-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/CelineNaomiDG/ai-evaluation-lab/actions/workflows/ci.yml)
 
-> **Status:** In Progress — v1 foundation
+A practical Python project for evaluating, comparing and tracking AI responses with an explicit, inspectable quality rubric.
 
-## Problem this project is solving
+> **Status:** In progress — working V1 foundation with automated tests, CI and a reproducible Docker runtime.
 
-Teams building with LLMs need a repeatable way to answer questions such as:
+## Why this project exists
 
-- Did this new prompt make the output better or worse?
-- Which model performs best for this task?
-- Are responses becoming less factual, less complete or less safe?
-- Which examples fail repeatedly and why?
-- Can a human reviewer and an automated evaluator agree on quality?
+Teams building with LLMs need repeatable ways to answer questions such as:
 
-A one-off "this answer looks good" judgement is difficult to compare over time. AI Evaluation Lab is being built to turn those reviews into structured, inspectable evaluation data.
+- Did a prompt change improve or regress output quality?
+- Which responses fail repeatedly, and why?
+- Are outputs correct, factual, relevant and complete?
+- Can human and automated evaluations be compared consistently?
 
-The long-term product direction is a lightweight **LLM QA Bench**: upload or generate test cases, score outputs against a rubric, compare prompt/model versions and detect quality regressions before an AI feature is shipped.
+AI Evaluation Lab turns qualitative review into structured evaluation data instead of relying on a vague "looks good" judgement.
 
-## Current V1
+## Demonstrated engineering work
 
-The first version intentionally starts small and auditable. It can:
+The current project includes:
 
-- represent an AI response evaluation as structured data;
-- score responses against a fixed rubric;
-- validate invalid or out-of-range inputs;
-- calculate an overall score;
-- persist evaluation results to JSON;
-- run unit and edge-case tests with `pytest`;
-- document the evaluation criteria and current limitations.
+- typed Python data models for evaluations and rubric scores;
+- explicit input validation and edge-case handling;
+- deterministic overall-score calculation;
+- JSON persistence and round-trip loading;
+- unit and parameterized tests with `pytest`;
+- an executable example workflow;
+- GitHub Actions CI across Python 3.11, 3.12 and 3.13;
+- a Dockerfile for a reproducible runtime;
+- project documentation and a transparent roadmap.
 
 ## Evaluation rubric
 
@@ -44,12 +45,13 @@ Each criterion is scored from **1 to 5**:
 | Clarity | Whether the answer is understandable and well structured |
 | Safety | Whether the response avoids unsafe or inappropriate behavior |
 
-The rubric is explicit so evaluations can be inspected instead of relying on a vague "good/bad" label.
-
 ## Repository structure
 
 ```text
 ai-evaluation-lab/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── src/
 │   └── ai_evaluation_lab/
 │       ├── __init__.py
@@ -58,15 +60,35 @@ ai-evaluation-lab/
 ├── tests/
 │   ├── test_evaluator.py
 │   └── test_storage.py
-├── data/
-│   └── .gitkeep
-├── docs/
-│   └── rubric.md
 ├── examples/
 │   └── basic_evaluation.py
-├── .gitignore
+├── docs/
+│   └── rubric.md
+├── data/
+│   └── .gitkeep
+├── Dockerfile
+├── .dockerignore
 ├── pyproject.toml
 └── README.md
+```
+
+## Run locally
+
+Requires Python 3.11+.
+
+```bash
+python -m pip install -e ".[dev]"
+python -m pytest -q
+python examples/basic_evaluation.py
+```
+
+The example writes an evaluation result to `data/example_evaluation.json`.
+
+## Run with Docker
+
+```bash
+docker build -t ai-evaluation-lab .
+docker run --rm ai-evaluation-lab
 ```
 
 ## Roadmap
@@ -76,8 +98,10 @@ ai-evaluation-lab/
 - [x] Rubric scoring
 - [x] Overall score calculation
 - [x] JSON persistence
-- [x] Unit and edge-case tests for evaluator
-- [ ] Example evaluation
+- [x] Unit and edge-case tests
+- [x] Runnable example
+- [x] GitHub Actions CI
+- [x] Docker runtime
 
 ### V2 — useful QA workflow
 - [ ] Evaluation datasets / test cases
@@ -94,8 +118,6 @@ ai-evaluation-lab/
 - [ ] Evaluation metrics and agreement analysis
 
 ### V4 — production-oriented evidence
-- [ ] Docker
-- [ ] GitHub Actions CI
 - [ ] Deployment
 - [ ] Logging and monitoring
 - [ ] Authentication / authorization
@@ -103,20 +125,18 @@ ai-evaluation-lab/
 
 ## Technical focus
 
-Current implementation:
+**Implemented:** Python · OOP/data modelling · type hints · pytest · JSON · Git/GitHub · GitHub Actions · Docker
 
-`Python` · `OOP` · `type hints` · `pytest` · `JSON` · `AI evaluation` · `Git/GitHub`
-
-Planned expansion:
-
-`FastAPI` · `PostgreSQL` · `LLM APIs` · `Docker` · `CI/CD` · `Azure` · `monitoring`
+**Planned expansion:** FastAPI · PostgreSQL · LLM APIs · deployment · monitoring
 
 ## Development approach
 
 **Build → test → document → improve.**
 
+The repository intentionally distinguishes completed work from planned work so that the technical evidence remains easy to verify.
+
 ## Author
 
 **Celine de Graaf**  
 Bachelor Informatica — Open Universiteit — In Progress  
-[GitHub profile](https://github.com/CelineNaomiDG)
+[GitHub profile](https://github.com/CelineNaomiDG) · [Portfolio](https://celine-portfolio-flame.vercel.app)
